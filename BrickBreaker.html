@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brick Breaker</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        canvas {
+            background-color: black;
+            display: block;
+            margin-top: 20px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="forBrickBreaker" width="450" height="530">
+        </canvas>
+
+    <script>
+        const canvas = document.getElementById("forBrickBreaker");
+        const ctx = canvas.getContext('2d');
+        const priemer = 10;
+
+        let x = canvas.width / 3;
+        let y = canvas.height - 400;
+        let rx = 1.5;
+        let ry = -1.5;
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(x, y, priemer, 0, Math.PI * 2);
+            ctx.strokeStyle = "rgba(0, 255, 0, 0.9)";
+            ctx.stroke();;
+            ctx.closePath();
+            x += rx;
+            y += ry;
+
+            if (y + ry < priemer) {
+                ry = -ry;
+            }
+
+            if (y + ry > canvas.height - priemer) {
+                ry = -ry;
+            }
+
+            if (x + rx < priemer) {
+                rx = -rx;
+            }
+
+            if (x + rx > canvas.width - priemer) {
+                rx = -rx;
+            }
+
+            ctx.beginPath();
+            ctx.rect(160, 480, 110, 20);
+            ctx.strokeStyle = "rgba(0, 255, 0, 0.9)";
+            ctx.stroke();
+            ctx.closePath();
+
+        }
+        setInterval(draw, 5);
+    </script>
+</body>
+
+</html>
